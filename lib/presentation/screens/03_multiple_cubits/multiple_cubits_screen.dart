@@ -1,4 +1,8 @@
+import 'package:blocs_app/presentation/bloc/02-counter-cubit/counter_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../bloc/03-theme/theme_cubit.dart';
 
 class MultipleCubitScreen extends StatelessWidget {
   const MultipleCubitScreen({super.key});
@@ -15,19 +19,34 @@ class MultipleCubitScreen extends StatelessWidget {
           const Spacer(
             flex: 1,
           ),
-          IconButton(
-            // icon: const Icon( Icons.light_mode_outlined, size: 100 ),
-            icon: const Icon(Icons.dark_mode_outlined, size: 100),
-            onPressed: () {},
+          BlocBuilder<ThemeCubit, ThemeState>(
+            builder: (context, state) {
+              return IconButton(
+                // icon: const Icon( Icons.light_mode_outlined, size: 100 ),
+                icon: state.isDarkMode
+                    ? const Icon(Icons.light_mode_outlined, size: 100)
+                    : const Icon(Icons.dark_mode_outlined, size: 100),
+                onPressed: () {
+                  context.read<ThemeCubit>().toogleTheme();
+                },
+              );
+            },
           ),
           const Text('Fernando Herrera', style: TextStyle(fontSize: 25)),
-          TextButton.icon(
-            icon: const Icon(
-              Icons.add,
-              size: 50,
-            ),
-            label: const Text('0', style: TextStyle(fontSize: 100)),
-            onPressed: () {},
+          BlocBuilder<CounterCubit, int>(
+            builder: (context, state) {
+              return TextButton.icon(
+                icon: const Icon(
+                  Icons.add,
+                  size: 50,
+                ),
+                label: Text(state.toString(),
+                    style: const TextStyle(fontSize: 100)),
+                onPressed: () {
+                  context.read<CounterCubit>().incrementBy(2);
+                },
+              );
+            },
           ),
           const Spacer(flex: 2),
         ],
