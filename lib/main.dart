@@ -1,4 +1,4 @@
-import 'package:blocs_app/presentation/bloc/blocs.dart';
+import 'package:blocs_app/presentation/blocs/blocs.dart';
 import 'package:flutter/material.dart';
 import 'package:blocs_app/config/config.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,7 +14,8 @@ class BlocProviders extends StatelessWidget {
       BlocProvider(create: (context) => UserNameCubit()),
       BlocProvider(create: (context) => RouterSimpleCubit()),
       BlocProvider(create: (context) => CounterCubit()),
-      BlocProvider(create: (context) => ThemeCubit())
+      BlocProvider(create: (context) => ThemeCubit()),
+      BlocProvider(create: (context) => NamesCubit())
     ], child: const MyApp());
   }
 }

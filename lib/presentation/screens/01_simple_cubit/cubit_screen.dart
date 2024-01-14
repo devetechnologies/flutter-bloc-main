@@ -1,7 +1,8 @@
 import 'package:blocs_app/config/config.dart';
-import 'package:blocs_app/presentation/bloc/01-simple-cubit/username_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../blocs/01-simple-cubit/username_cubit.dart';
 
 class CubitScreen extends StatelessWidget {
   const CubitScreen({super.key});

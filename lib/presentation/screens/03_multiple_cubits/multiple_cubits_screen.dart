@@ -1,8 +1,7 @@
-import 'package:blocs_app/presentation/bloc/02-counter-cubit/counter_cubit.dart';
+import 'package:blocs_app/config/config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../bloc/03-theme/theme_cubit.dart';
+import '../../blocs/blocs.dart';
 
 class MultipleCubitScreen extends StatelessWidget {
   const MultipleCubitScreen({super.key});
@@ -32,7 +31,18 @@ class MultipleCubitScreen extends StatelessWidget {
               );
             },
           ),
-          const Text('Fernando Herrera', style: TextStyle(fontSize: 25)),
+          BlocBuilder<NamesCubit, NamesState>(
+            builder: (context, state) {
+              return Text(state.toString(),
+                  style: const TextStyle(fontSize: 25));
+            },
+          ),
+
+          /* BlocBuilder<UserNameCubit, String>(
+            builder: (context, state) {
+              return Text(state, style: const TextStyle(fontSize: 25));
+            },
+          ),*/
           BlocBuilder<CounterCubit, int>(
             builder: (context, state) {
               return TextButton.icon(
@@ -54,7 +64,9 @@ class MultipleCubitScreen extends StatelessWidget {
       floatingActionButton: FloatingActionButton.extended(
         label: const Text('Nombre aleatorio'),
         icon: const Icon(Icons.refresh_rounded),
-        onPressed: () {},
+        onPressed: () {
+          context.read<NamesCubit>().setName(RandomGenerator.getRandomName());
+        },
       ),
     );
   }
