@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:blocs_app/config/config.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-void main() => runApp(const BlocProviders());
+void main() {
+  serviceLocatorInit();
+  runApp(const BlocProviders());
+}
 
 class BlocProviders extends StatelessWidget {
   const BlocProviders({super.key});
@@ -11,11 +14,12 @@ class BlocProviders extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(providers: [
-      BlocProvider(create: (context) => UserNameCubit()),
-      BlocProvider(create: (context) => RouterSimpleCubit()),
-      BlocProvider(create: (context) => CounterCubit()),
-      BlocProvider(create: (context) => ThemeCubit()),
-      BlocProvider(create: (context) => NamesCubit())
+      BlocProvider(create: (context) => getIt<UserNameCubit>()),
+      BlocProvider(create: (context) => getIt<RouterSimpleCubit>()),
+      BlocProvider(create: (context) => getIt<CounterCubit>()),
+      BlocProvider(create: (context) => getIt<ThemeCubit>()),
+      BlocProvider(create: (context) => getIt<NamesCubit>()),
+      BlocProvider(create: (context) => getIt<GuestBloc>())
     ], child: const MyApp());
   }
 }
